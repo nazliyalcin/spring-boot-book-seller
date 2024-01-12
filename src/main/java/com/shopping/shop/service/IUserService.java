@@ -10,4 +10,5 @@ public interface IUserService {
 
     Optional<User> findByUserName(String userName);
     void makeAdmin(String userName);
+
 }

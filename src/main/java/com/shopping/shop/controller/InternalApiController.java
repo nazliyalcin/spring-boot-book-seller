@@ -23,5 +23,12 @@ public class InternalApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("/make-admin/{userName}")
+    public ResponseEntity<?> makeAdminPatch(@PathVariable String userName)
+    {
+        userService.makeAdmin(userName);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }

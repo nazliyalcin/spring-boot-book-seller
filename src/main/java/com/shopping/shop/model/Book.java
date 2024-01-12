@@ -1,13 +1,17 @@
 package com.shopping.shop.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "books")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -28,4 +32,6 @@ public class Book {
 
     @Column(name="price",nullable = false)
     private Double price;
+
+
 }

@@ -5,6 +5,7 @@ import com.shopping.shop.model.User;
 import com.shopping.shop.service.IAuthenticationService;
 import com.shopping.shop.service.IBookService;
 import com.shopping.shop.service.IUserService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

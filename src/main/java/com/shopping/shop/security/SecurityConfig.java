@@ -23,6 +23,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -56,7 +60,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable());
+
                 /*.securityMatcher("api/authentication/sign-up")
                 .authorizeRequests((authorizeRequests) ->
                         authorizeRequests
@@ -82,6 +88,7 @@ public class SecurityConfig {
                 .addFilterBefore(internalApiAuthenticationFilter(), JwtAuthorizationFilter.class);
 
 
+
         return http.build();
     }
 
@@ -91,6 +98,16 @@ public class SecurityConfig {
         return new InternalApiAuthenticationFilter(internalApiKey);
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.addAllowedOrigin("http://localhost:4200");
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
 
 
 }

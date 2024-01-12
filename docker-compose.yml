@@ -1,0 +1,23 @@
+version: '2'
+services:
+  postgresqldb:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=book_db
+  app:
+    container_name: docker-springboot-postgresql
+    image: docker-springboot-postgresql
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresqldb:5432/book_db
+     - SPRING_DATASOURCE_USERNAME=postgres
+     - SPRING_DATASOURCE_PASSWORD=postgres
+     - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - postgresqldb
+    links:
+      - postgresqldb
